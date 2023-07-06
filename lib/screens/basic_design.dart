@@ -10,13 +10,9 @@ class BasicDesignScreen extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              //TODO: Landscape image
               Image(image: AssetImage('assets/landscape.jpg')),
-              //TODO: Title section
               TitleSection(),
-              //TODO: Button section
               ButtonSection(),
-              //TODO: overview
               Overview()
             ],
           ),
