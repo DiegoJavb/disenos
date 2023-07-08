@@ -13,11 +13,22 @@ class CustomBottomNavigation extends StatelessWidget {
       currentIndex: 2,
       items: const [
         BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today_outlined), label: 'Calendario'),
+            icon: Icon(
+              Icons.calendar_today_outlined,
+              size: 40,
+            ),
+            label: 'Calendario'),
         BottomNavigationBarItem(
-            icon: Icon(Icons.pie_chart_outline_outlined), label: 'Gráfica'),
+            icon: Icon(
+              Icons.pie_chart_outline_outlined,
+              size: 40,
+            ),
+            label: 'Gráfica'),
         BottomNavigationBarItem(
-            icon: Icon(Icons.supervised_user_circle_outlined),
+            icon: Icon(
+              Icons.supervised_user_circle_outlined,
+              size: 40,
+            ),
             label: 'Usuarios'),
       ],
     );

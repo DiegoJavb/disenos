@@ -10,6 +10,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
+          //TODO: background
           const Background(),
           //TODO: HomeBody
           _HomeBody(),
@@ -26,9 +27,12 @@ class _HomeBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //TODO: titles
-          PageTitle()
+          PageTitle(),
+          //TODO: Card Table
+          CardTable()
         ],
       ),
     );

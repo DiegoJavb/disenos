@@ -15,14 +15,14 @@ class PageTitle extends StatelessWidget {
             Text(
               'Classify transaction',
               style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 30,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
             ),
             SizedBox(height: 10),
             Text(
               'Classify this transaction into a particular category',
-              style: TextStyle(fontSize: 15, color: Colors.white),
+              style: TextStyle(fontSize: 25, color: Colors.white),
             ),
           ],
         ),
