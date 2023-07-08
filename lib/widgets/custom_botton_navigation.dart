@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomBottomNavigation extends StatelessWidget {
+  const CustomBottomNavigation({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -9,7 +11,7 @@ class CustomBottomNavigation extends StatelessWidget {
       showUnselectedLabels: false,
       selectedItemColor: Colors.pink,
       backgroundColor: const Color.fromRGBO(55, 57, 84, 1),
-      unselectedItemColor: Color.fromRGBO(116, 117, 152, 1),
+      unselectedItemColor: const Color.fromRGBO(116, 117, 152, 1),
       currentIndex: 2,
       items: const [
         BottomNavigationBarItem(
