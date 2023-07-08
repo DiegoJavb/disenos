@@ -1,6 +1,6 @@
-import 'package:disenos/widgets/page_title.dart';
 import 'package:flutter/material.dart';
-import 'package:disenos/widgets/background.dart';
+
+import 'package:disenos/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -15,6 +15,8 @@ class HomeScreen extends StatelessWidget {
           _HomeBody(),
         ],
       ),
+      //TODO: botton navigation
+      bottomNavigationBar: CustomBottomNavigation(),
     );
   }
 }
