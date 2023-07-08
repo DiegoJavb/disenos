@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class CardTable extends StatelessWidget {
@@ -37,6 +39,16 @@ class CardTable extends StatelessWidget {
               titleIcoco: 'Grocery',
               color: Colors.green),
         ]),
+        TableRow(children: [
+          _SingleCard(
+              icono: Icons.food_bank,
+              titleIcoco: 'Food',
+              color: Colors.yellowAccent),
+          _SingleCard(
+              icono: Icons.place,
+              titleIcoco: 'Places',
+              color: Colors.pinkAccent),
+        ]),
       ],
     );
   }
@@ -48,7 +60,6 @@ class _SingleCard extends StatelessWidget {
   final Color color;
 
   const _SingleCard({
-    super.key,
     required this.icono,
     required this.titleIcoco,
     required this.color,
@@ -57,25 +68,37 @@ class _SingleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(15),
-      height: 275,
-      decoration: BoxDecoration(
-          color: Color.fromRGBO(62, 66, 107, 0.7),
-          borderRadius: BorderRadius.circular(20)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CircleAvatar(
-            backgroundColor: color,
-            child: Icon(icono, size: 50),
-            radius: 50,
+      margin: const EdgeInsets.all(15),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+          child: Container(
+            height: 275,
+            decoration: BoxDecoration(
+                color: Color.fromRGBO(62, 66, 107, 0.7),
+                borderRadius: BorderRadius.circular(20)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  backgroundColor: color,
+                  radius: 50,
+                  child: Icon(
+                    icono,
+                    size: 50,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 15),
+                Text(
+                  titleIcoco,
+                  style: TextStyle(color: color, fontSize: 25),
+                )
+              ],
+            ),
           ),
-          const SizedBox(height: 15),
-          Text(
-            titleIcoco,
-            style: TextStyle(color: color, fontSize: 25),
-          )
-        ],
+        ),
       ),
     );
   }
