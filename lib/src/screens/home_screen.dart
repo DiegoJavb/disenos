@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:disenos/widgets/widgets.dart';
+import 'package:disenos/src/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
