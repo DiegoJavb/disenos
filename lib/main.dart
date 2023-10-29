@@ -1,4 +1,5 @@
 import 'package:disenos/src/screens/animations_screen.dart';
+import 'package:disenos/src/screens/letter_x_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -18,13 +19,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      initialRoute: 'animations_screens',
+      initialRoute: 'letter_screens',
       routes: {
         'basic_design': (_) => const BasicDesignScreen(),
         'scroll_design': (_) => const ScrollDesignScreen(),
         'home_screen': (_) => const HomeScreen(),
         'header_screen': (_) => const HeaderScreen(),
         'animations_screens': (_) => const AnimationsScreen(),
+        'letter_screens': (_) => LetterXContainer(),
       },
     );
   }

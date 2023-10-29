@@ -6,7 +6,7 @@ class AnimationsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: CuadradoAnimado(),
       ),
@@ -15,6 +15,8 @@ class AnimationsScreen extends StatelessWidget {
 }
 
 class CuadradoAnimado extends StatefulWidget {
+  const CuadradoAnimado({super.key});
+
   @override
   State<CuadradoAnimado> createState() => _CuadradoAnimadoState();
 }
@@ -24,6 +26,7 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
   late AnimationController controller;
   late Animation<double> rotacion;
   late Animation<double> opacidad;
+  late Animation<double> opacidadOut;
   late Animation<double> moverDerecha;
   late Animation<double> agrandar;
 
@@ -38,25 +41,31 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
       begin: 0.0,
       end: 2 * Math.pi,
     ).animate(CurvedAnimation(parent: controller, curve: Curves.easeOut));
-
+    //La opacidad va siempre de 0 a 1, 0 es totalmente invicible y uno es totalmente visible
     opacidad = Tween(begin: 0.1, end: 1.0).animate(CurvedAnimation(
       parent: controller,
-      curve: Interval(0, 0.25, curve: Curves.easeOut),
+      curve: const Interval(0, 0.25, curve: Curves.easeOut),
     ));
 
-    moverDerecha = Tween(begin: 0.0, end: 20.0).animate(CurvedAnimation(
+    opacidadOut = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
       parent: controller,
-      curve: Interval(0, 0.25, curve: Curves.easeOut),
+      curve: const Interval(0.75, 1.0, curve: Curves.easeOut),
     ));
 
-    agrandar = Tween(begin: 0.0, end: 20.0).animate(CurvedAnimation(
+    moverDerecha = Tween(begin: 0.0, end: 200.0).animate(CurvedAnimation(
       parent: controller,
-      curve: Interval(0, 0.25, curve: Curves.easeOut),
+      curve: Curves.easeOut,
+    ));
+
+    agrandar = Tween(begin: 0.0, end: 2.0).animate(CurvedAnimation(
+      parent: controller,
+      curve: Curves.easeOut,
     ));
 
     controller.addListener(() {
-      print('Status: ${controller.status}');
+      // print('Status: ${controller.status}');
       if (controller.status == AnimationStatus.completed) {
+        // controller.repet();
         // controller.reverse();
         controller.reset();
       }
@@ -78,14 +87,21 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
     return AnimatedBuilder(
       animation: controller,
       child: _Rectangulo(),
-      builder: (BuildContext context, Widget? child) {
+      builder: (BuildContext context, Widget? childRectangulo) {
+        print('Opacidad: ${opacidad.value}');
+        print('OpacidadOut: ${opacidadOut.value}');
+        print('Rotación: ${rotacion.value}');
+        print('--------------------------------------------');
         return Transform.translate(
           offset: Offset(moverDerecha.value, 0),
           child: Transform.rotate(
             angle: rotacion.value,
             child: Opacity(
-              opacity: opacidad.value,
-              child: child,
+              opacity: opacidad.value - opacidadOut.value,
+              child: Transform.scale(
+                scale: agrandar.value,
+                child: childRectangulo,
+              ),
             ),
           ),
         );

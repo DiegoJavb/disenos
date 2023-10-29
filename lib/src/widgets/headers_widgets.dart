@@ -16,11 +16,12 @@ class HeadersBordesRedondeados extends StatelessWidget {
     return Container(
       height: 300,
       decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(50),
-            bottomRight: Radius.circular(50),
-          ),
-          color: Color(0xff615AAB)),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(50),
+          bottomRight: Radius.circular(50),
+        ),
+        color: Color(0xff615AAB),
+      ),
     );
   }
 }
@@ -31,7 +32,7 @@ class HeaderDiagonal extends StatelessWidget {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      child: CustomPaint(painter: _HeaderWavesPainter()),
+      child: CustomPaint(painter: _HeaderWavesGradiente()),
     );
   }
 }
@@ -39,6 +40,11 @@ class HeaderDiagonal extends StatelessWidget {
 class _HeaderDiagonalPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
+    /**
+     * Paint = Lapiz
+     * Canvas = lienzo
+     * Path = Ruta (por donde se mueve el lapiz)
+    */
     final paint = Paint(); //Este es el lapiz
     // Propiedades
     paint.color = const Color(0xff615AAB);
@@ -64,12 +70,11 @@ class _HeaderDiagonalPainter extends CustomPainter {
   }
 }
 
-class HeaderTriangular extends CustomPainter {
+class _HeaderTriangular extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint();
-    //properties
-    //este es el lapiz
+    final paint = Paint(); //este es el lapiz
+    //properties del lapiz
     paint.color = const Color(0xff615AAB);
     paint.style = PaintingStyle.fill; //.fill    .stroke
     paint.strokeWidth = 2;
@@ -85,7 +90,7 @@ class HeaderTriangular extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(HeaderTriangular oldDelegate) => true;
+  bool shouldRepaint(_HeaderTriangular oldDelegate) => true;
 }
 
 class _HeaderPicoPainter extends CustomPainter {
@@ -154,13 +159,13 @@ class _HeaderWavesPainter extends CustomPainter {
     path.lineTo(0, size.height * 0.25);
     path.quadraticBezierTo(
       size.width * 0.25,
-      size.height * 0.2,
+      size.height * 0.20,
       size.width * 0.5,
       size.height * 0.25,
     );
     path.quadraticBezierTo(
       size.width * 0.75,
-      size.height * 0.3,
+      size.height * 0.30,
       size.width,
       size.height * 0.25,
     );
@@ -172,19 +177,6 @@ class _HeaderWavesPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_HeaderWavesPainter oldDelegate) => true;
-}
-
-class HeaderWaveGraciente extends StatelessWidget {
-  const HeaderWaveGraciente({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: double.infinity,
-      width: double.infinity,
-      child: CustomPaint(painter: _HeaderWavesGradiente()),
-    );
-  }
 }
 
 class _HeaderWavesGradiente extends CustomPainter {
