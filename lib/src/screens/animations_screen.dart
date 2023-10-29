@@ -23,6 +23,9 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
   late Animation<double> rotacion;
+  late Animation<double> opacidad;
+  late Animation<double> moverDerecha;
+  late Animation<double> agrandar;
 
   @override
   void initState() {
@@ -31,11 +34,31 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
       duration: const Duration(milliseconds: 4000),
     );
 
-    rotacion = Tween(begin: 0.0, end: 2 * Math.pi).animate(controller);
+    rotacion = Tween(
+      begin: 0.0,
+      end: 2 * Math.pi,
+    ).animate(CurvedAnimation(parent: controller, curve: Curves.easeOut));
+
+    opacidad = Tween(begin: 0.1, end: 1.0).animate(CurvedAnimation(
+      parent: controller,
+      curve: Interval(0, 0.25, curve: Curves.easeOut),
+    ));
+
+    moverDerecha = Tween(begin: 0.0, end: 20.0).animate(CurvedAnimation(
+      parent: controller,
+      curve: Interval(0, 0.25, curve: Curves.easeOut),
+    ));
+
+    agrandar = Tween(begin: 0.0, end: 20.0).animate(CurvedAnimation(
+      parent: controller,
+      curve: Interval(0, 0.25, curve: Curves.easeOut),
+    ));
+
     controller.addListener(() {
       print('Status: ${controller.status}');
       if (controller.status == AnimationStatus.completed) {
-        controller.reverse();
+        // controller.reverse();
+        controller.reset();
       }
     });
     super.initState();
@@ -56,9 +79,15 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
       animation: controller,
       child: _Rectangulo(),
       builder: (BuildContext context, Widget? child) {
-        return Transform.rotate(
-          angle: rotacion.value,
-          child: child,
+        return Transform.translate(
+          offset: Offset(moverDerecha.value, 0),
+          child: Transform.rotate(
+            angle: rotacion.value,
+            child: Opacity(
+              opacity: opacidad.value,
+              child: child,
+            ),
+          ),
         );
       },
     );
